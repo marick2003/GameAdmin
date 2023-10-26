@@ -25,19 +25,19 @@ export const constantRoutes = [
   {
     path: '/',
     component: () => import('@/layout/index.vue'),
-    redirect: '/home',
+    redirect: '/dashboard',
     children: [
       {
-        path: '/home',
+        path: '/dashboard',
         component: () => import('@/views/home/index.vue'),
         name: 'Home',
-        meta: { title: '首页', icon: 'House', affix: true }
+        meta: { title: '仪表板', icon: 'House', affix: true }
       },
       {
         path: '/setting',
         component: () => import('@/views/setting/index.vue'),
         name: 'Setting',
-        meta: { title: '设置', icon: 'Tools', roles: ['admin'] }
+        meta: { title: '帐户管理', icon: 'Tools', roles: ['admin'] }
       },
       {
         path: '/menu',

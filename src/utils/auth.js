@@ -6,7 +6,7 @@ const nameKey = 'name'
 const avatarKey = 'avatar'
 
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return 'test';//Cookies.get(TokenKey)
 }
 
 export function setToken(token) {
@@ -30,7 +30,7 @@ export function removeRoles() {
 }
 
 export function getName() {
-  return Cookies.get(nameKey)
+  return  'test';//Cookies.get(nameKey)
 }
 
 export function setName(name) {
@@ -42,7 +42,7 @@ export function removeName() {
 }
 
 export function getAvatar() {
-  return Cookies.get(avatarKey)
+  return null;//Cookies.get(avatarKey)
 }
 
 export function setAvatar(avatar) {

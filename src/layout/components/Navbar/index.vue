@@ -3,12 +3,13 @@
     <Hamburger class="hamburger-container" :is-active="opened" @toggleClick="toggleSideBar" />
     <Breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
-      <!-- <el-tooltip effect="dark" content="全屏" placement="bottom">
-        <Screenfull class="screenfull" />
-      </el-tooltip> -->
+      <el-tooltip effect="dark" content="全屏" placement="bottom">
+        <el-icon><FullScreen /></el-icon>
+      </el-tooltip> 
       <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
-          <img :src="avatar ? avatar : '/img/logo.png'" class="user-avatar" />
+          <img :src="avatar ? avatar : 'src/assets/img/defaultUser.svg'" class="user-avatar w-10" />
+        
           <i class="el-icon-caret-bottom" />
         </div>
         <template #dropdown>

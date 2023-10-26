@@ -66,14 +66,15 @@ const submitForm = async () => {
     if (valid) {
       btnLoading.value = true
       // 访问登录接口
-      store
-        .dispatch('user/login', param)
-        .then(() => {
-          router.push('/')
-        })
-        .finally(() => {
-          btnLoading.value = false
-        })
+      // store
+      //   .dispatch('user/login', param)
+      //   .then(() => {
+      //     router.push('/')
+      //   })
+      //   .finally(() => {
+      //     btnLoading.value = false
+      //   })
+        router.push('/')
     } else {
       ElMessage.error('请输入用户名和密码')
     }
