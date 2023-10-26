@@ -3,6 +3,10 @@
 @import './sidebar.scss';
 @import './atomic.scss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *,
 *::before,
 *::after {

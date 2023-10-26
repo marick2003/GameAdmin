@@ -18,7 +18,7 @@ export function removeToken() {
 }
 
 export function getRoles() {
-  return Cookies.get(RoleKey)
+  return 'admin';//Cookies.get(RoleKey)
 }
 
 export function setRoles(role) {

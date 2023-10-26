@@ -20,14 +20,15 @@ export const app = defineStore({
                 cookies.set('sidebarStatus', '')
             }
         },
-        closeSideBar(){
-
+        closeSideBar(withoutAnimation){
+            this.sidebar.opened=false
+            this.sidebar.withoutAnimation=withoutAnimation
         },
-        toggleDevice(){
-
+        toggleDevice(device){
+            this.device = device;
         },
         setSize(){
-            
+
         }
 
     }

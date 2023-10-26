@@ -3,7 +3,7 @@
     <div class="logo" @click="$router.push('/')">
       <img class="logo-img" :src="logoSrc" alt="logo" />
       <transition name="el-zoom-in-center">
-        <h1 v-show="opened" class="logo-text">Vue Element Admin</h1>
+        <h1 v-show="opened" class="logo-text">Admin</h1>
       </transition>
     </div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
@@ -28,7 +28,7 @@ import { useStore } from 'vuex'
 import { constantRoutes } from '@/router'
 import { getRoles } from '@/utils/auth'
 import SidebarItem from './SidebarItem.vue'
-import logoSrc from '@/assets/img/logo.png'
+import logoSrc from '@img/logo.png'
 
 const roles = getRoles()
 const store = useStore()
@@ -50,12 +50,14 @@ const filterRoutes = () => {
       routerList.push(...item.children)
     }
   })
+  
   for (let i = 0; i < routerList.length; i++) {
     if (routerList[i].meta && routerList[i].meta.roles && !routerList[i].meta.roles.includes(roles)) {
       routerList.splice(i, 1)
       i--
     }
   }
+
   filterChildrens(routerList)
 }
 

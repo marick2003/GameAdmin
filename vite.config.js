@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url';
 import postcssNesting from 'postcss-nesting';
 import tailwindcss from 'tailwindcss'
-
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {   
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@img': resolve('./src/assets/img')
     },
   
   },
