@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "dev:mock": "cross-env USE_MOCK=true vite",
-    "build:mock":"cross-env USE_CHUNK_MOCK=true vite build",
     "preview": "vite preview"
   },
   "dependencies": {

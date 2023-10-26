@@ -2,8 +2,6 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import { viteMockServe } from 'vite-plugin-mock'
-const localEnabled = process.env.USE_MOCK || false;
-const prodEnabled = process.env.USE_CHUNK_MOCK || false
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   const prodMock = true
@@ -15,8 +13,8 @@ export default defineConfig(({ command }) => {
       viteMockServe({
         supportTs: false,
         mockPath: 'mock',
-        localEnabled: localEnabled,
-        prodEnabled: prodEnabled,
+        localEnabled: command === 'serve',
+        prodEnabled: command !== 'serve' && prodMock,
         injectCode: `
           import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
