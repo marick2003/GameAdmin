@@ -39,7 +39,6 @@ service.interceptors.response.use(
       removeAvatar()
       location.reload()
     }
-    console.log(error);
     ElMessage({
       type: 'error',
       message: error.message
