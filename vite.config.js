@@ -1,32 +1,65 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { fileURLToPath, URL } from 'node:url';
-import postcssNesting from 'postcss-nesting';
-import tailwindcss from 'tailwindcss'
 import { resolve } from 'path'
-
+import vue from '@vitejs/plugin-vue'
+import { viteMockServe } from 'vite-plugin-mock'
+const localEnabled = process.env.USE_MOCK || false;
+const prodEnabled = process.env.USE_CHUNK_MOCK || false
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {   
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@img': resolve('./src/assets/img')
-    },
-  
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "./src/styles/variables.scss";`
+export default defineConfig(({ command }) => {
+  const prodMock = true
+  return {
+    // base: '/',
+    base: command === 'serve' ? '/' : '/vue3-element-admin/',
+    plugins: [
+      vue(),
+      viteMockServe({
+        supportTs: false,
+        mockPath: 'mock',
+        localEnabled: localEnabled,
+        prodEnabled: prodEnabled,
+        injectCode: `
+          import { setupProdMockServer } from './mockProdServer';
+          setupProdMockServer();
+        `
+      })
+    ],
+    resolve: {
+      alias: {
+        '@': resolve('./src'),
+        '@img': resolve('./src/assets/img')
       }
-    }
-  },
-  pages: {
-    index: {
-      entry: 'src/main.js',
-      title: 'BackEnd',
     },
-  },
-
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "./src/styles/variables.scss";`
+        }
+      }
+    },
+    // server: {
+    //   port: 3001,
+    //   open: false,
+    //   proxy: {
+    //     '/api': {
+    //       target: 'http://admin.xueyueob.cn/api',
+    //       changeOrigin: true,
+    //       ws: true,
+    //       rewrite: (path) => path.replace(new RegExp('^/api'), '')
+    //     }
+    //   }
+    // },
+    build: {
+      // sourcemap: true,
+      manifest: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'vuex'],
+            'element-plus': ['element-plus'],
+          }
+        }
+      },
+      chunkSizeWarningLimit: 500
+    }
+  }
 })

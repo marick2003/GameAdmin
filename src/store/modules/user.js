@@ -38,6 +38,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       user_login(userInfo)
         .then((res) => {
+         
           console.log(11, res)
           if (res.token) {
             commit('SET_TOKEN', res.token)
@@ -73,7 +74,6 @@ const actions = {
           commit('SET_NAME', '')
           commit('SET_AVATAR', '')
           dispatch('tagsView/delAllViews', null, { root: true })
-
           resolve(res)
         })
         .catch((error) => {

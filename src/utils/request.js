@@ -16,13 +16,13 @@ service.interceptors.request.use(
       config.headers['Authorization'] = 'Bearer__' + token
     }
     // 加上取消请求
-    config.cancelToken = new axios.CancelToken((cancel) => {
-      if (Array.isArray(window.axiosCancelTokenList)) {
-        window.axiosCancelTokenList.push(cancel)
-      } else {
-        window.axiosCancelTokenList = [cancel]
-      }
-    })
+    // config.cancelToken = new axios.CancelToken((cancel) => {
+    //   if (Array.isArray(window.axiosCancelTokenList)) {
+    //     window.axiosCancelTokenList.push(cancel)
+    //   } else {
+    //     window.axiosCancelTokenList = [cancel]
+    //   }
+    // })
     return config
   },
   (error) => Promise.reject(error)
@@ -39,6 +39,7 @@ service.interceptors.response.use(
       removeAvatar()
       location.reload()
     }
+    console.log(error);
     ElMessage({
       type: 'error',
       message: error.message

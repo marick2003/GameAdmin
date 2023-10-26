@@ -6,7 +6,8 @@ const state = {
   sidebar: {
     opened: Cookies.get('sidebarStatus') ? !!Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
-  }
+  },
+  gameList:[],
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
   SET_SIZE: (state, size) => {
     state.size = size
     Cookies.set('size', size)
+  },
+  SET_GAME_LIST:(state, list)=>{
+    state.gameList = list
   }
 }
 
@@ -45,6 +49,9 @@ const actions = {
   },
   setSize({ commit }, size) {
     commit('SET_SIZE', size)
+  },
+  setGameList({ commit }, list){
+    commit('SET_GAME_LIST', list)
   }
 }
 

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "dev:mock": "cross-env USE_MOCK=true vite",
+    "build:mock":"cross-env USE_CHUNK_MOCK=true vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,6 +16,7 @@
     "@vueuse/integrations": "^10.5.0",
     "axios": "^1.5.1",
     "dotenv": "^16.3.1",
+    "echarts": "^5.4.3",
     "element-plus": "^2.4.0",
     "js-cookie": "^3.0.5",
     "nprogress": "^0.2.0",
@@ -31,9 +34,11 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.16",
+    "mockjs": "^1.1.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.0",
     "tailwindcss": "^3.3.5",
-    "vite": "^4.4.6"
+    "vite": "^4.4.6",
+    "vite-plugin-mock": "^3.0.0"
   }
 }
