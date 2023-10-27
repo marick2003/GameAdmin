@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { getGameList } from '../../api/app'
 
 const state = {
   device: 'desktop',
@@ -11,6 +12,9 @@ const state = {
 }
 
 const mutations = {
+  INIT:(state)=>{
+   
+  },
   TOGGLE_SIDEBAR: (state) => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
@@ -38,6 +42,20 @@ const mutations = {
 }
 
 const actions = {
+  // 初始化頁面資料
+  init({commit}){
+    return new Promise((resolve, reject) => {
+      getGameList().then(res=>{
+          if(res.message=='success'){
+            commit('SET_GAME_LIST', res.list);
+            resolve(res)
+          } 
+      }).catch((error) => {
+        reject(error)
+      })
+    
+    })
+  },
   toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },
@@ -52,7 +70,16 @@ const actions = {
   },
   setGameList({ commit }, list){
     commit('SET_GAME_LIST', list)
-  }
+  },
+  //測速
+  async APIgetNetTestLines(){
+    const response = await getNetTestLines();
+    return response.data;
+  },
+  async APIspeedTestInfo(){
+    const response = await speedTestInfo();
+    return response.data;
+  },
 }
 
 export default {

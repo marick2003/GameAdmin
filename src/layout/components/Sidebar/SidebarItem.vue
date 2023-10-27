@@ -54,7 +54,5 @@ const props = defineProps({
     default: false
   }
 })
-
-console.log(props.nav)
 toRefs(props)
 </script>

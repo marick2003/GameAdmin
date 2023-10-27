@@ -1,16 +1,21 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <Hamburger class="hamburger-container" :is-active="opened" @toggleClick="toggleSideBar" />
-    <Breadcrumb class="breadcrumb-container" />
+    <div class="float-left flex  items-centertext-sm  w-1/2">
+      公告:
+      <Marquee :announcement="['hello', 'こんにちは', 'bonjour']"></Marquee>
+    </div>
     <div class="right-menu">
-      <el-tooltip effect="dark" content="全屏" placement="bottom">
-        <el-icon><FullScreen /></el-icon>
-      </el-tooltip> 
+      <div class="text-sm">
+        在線:<span class="mx-2">1</span>
+      </div>
+      <el-button  round>在線客服</el-button>
+      <el-button  round>網路測速</el-button>
       <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
-          <img :src="avatar ? avatar : 'src/assets/img/defaultUser.svg'" class="user-avatar w-10" />
-        
-          <i class="el-icon-caret-bottom" />
+          <!-- <img :src="avatar ? avatar : 'src/assets/img/defaultUser.svg'" class="user-avatar w-10" /> -->
+          <el-avatar class="user-avatar" :icon="!avatar ? UserFilled : ''" :src="avatar ? avatar : ''" />
+         
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -20,6 +25,9 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <div>
+        {{ userName }}
+      </div>
     </div>
   </el-menu>
 </template>
@@ -30,14 +38,14 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import Hamburger from './Hamburger.vue'
-import Breadcrumb from './Breadcrumb.vue'
+import Marquee from './Marquee.vue'
 import Screenfull from './Screenfull.vue'
-
+import { UserFilled } from '@element-plus/icons-vue'
 const router = useRouter()
 const store = useStore()
 const opened = computed(() => store.state.app.sidebar.opened)
 const avatar = computed(() => store.state.user.avatar)
-
+const userName= computed(()=> store.state.user.name)
 const toggleSideBar = () => {
   store.dispatch('app/toggleSideBar')
 }
@@ -109,7 +117,7 @@ const loginOut = () => {
 
     .avatar-container {
       // height: 50px;
-      margin-right: 30px;
+      //margin-right: 30px;
 
       .avatar-wrapper {
         position: relative;

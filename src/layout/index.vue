@@ -55,6 +55,9 @@ onMounted(() => {
     store.dispatch('app/toggleDevice', 'mobile')
     store.dispatch('app/closeSideBar', { withoutAnimation: true })
   }
+  store.dispatch('app/init').then(res=>{
+    console.log("gameList:"+store.state.app.gameList);
+  })
 })
 
 onBeforeUnmount(() => {

@@ -6,7 +6,9 @@
         <h1 v-show="opened" class="logo-text">Admin</h1>
       </transition>
     </div>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+    <el-scrollbar class="py-5" wrap-class="scrollbar-wrapper">
+    
+      <el-text v-if="!isCollapse" class="mx-14 text-gray-400">主要</el-text>
       <el-menu
         :router="true"
         :default-active="$route.path"
@@ -18,12 +20,25 @@
       >
         <SidebarItem v-for="item in routerList" :key="item.path" :index="item.path" :nav="item" />
       </el-menu>
+      <el-text v-if="!isCollapse" class="mx-14 text-gray-400">遊戲</el-text>
+      <el-menu
+        :router="true"
+        :default-active="selectGame"
+        :collapse="isCollapse"
+        :show-timeout="200"
+        text-color="#fff"
+        background-color="#4a5a74"
+        active-text-color="#409EFF"
+      >
+        <SidebarItem v-for="item in gameList" :key="item.path" :index="item.path" :nav="item" />
+      </el-menu>
     </el-scrollbar>
+
   </div>
 </template>
 
 <script setup>
-import { reactive, computed, onMounted } from 'vue'
+import { ref,reactive, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { constantRoutes } from '@/router'
 import { getRoles } from '@/utils/auth'
@@ -36,7 +51,9 @@ const routerList = reactive([])
 
 const opened = computed(() => store.state.app.sidebar.opened)
 const isCollapse = computed(() => !opened.value)
+const gameList= computed(()=>store.state.app.gameList)
 
+const selectGame = ref('');
 onMounted(() => {
   filterRoutes()
 })

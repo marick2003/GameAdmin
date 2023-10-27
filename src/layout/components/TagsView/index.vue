@@ -1,6 +1,6 @@
 <template>
-  <div id="tags-view-container" class="tags-view-container">
-    <ScrollPane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
+  <div id="tags-view-container" class="tags-view-container flex justify-between items-center">
+    <ScrollPane ref="scrollPane" class="tags-view-wrapper w-auto " @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
         :key="tag.path"
@@ -13,12 +13,14 @@
         {{ tag.title }}
         <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link>
+      
     </ScrollPane>
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>
       <li @click="closeOthersTags">Close Others</li>
       <li @click="closeAllTags(selectedTag)">Close All</li>
     </ul>
+    <Breadcrumb ></Breadcrumb>
   </div>
 </template>
 
@@ -26,9 +28,9 @@
 import { defineComponent } from 'vue'
 import ScrollPane from './ScrollPane.vue'
 import path from 'path'
-
+import Breadcrumb from './Breadcrumb.vue'
 export default defineComponent({
-  components: { ScrollPane },
+  components: { ScrollPane,Breadcrumb },
   data() {
     return {
       visible: false,
