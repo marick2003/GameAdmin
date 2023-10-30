@@ -83,7 +83,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .scroll-container {
   position: relative;
-  width: 100%;
+  width: auto;
   overflow: hidden;
   white-space: nowrap;
 

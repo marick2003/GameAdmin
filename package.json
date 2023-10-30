@@ -34,6 +34,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.16",
+    "cross-env": "^7.0.3",
     "mockjs": "^1.1.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.0",
