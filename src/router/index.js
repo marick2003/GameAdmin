@@ -46,9 +46,9 @@ export const constantRoutes = [
         meta: { title: '操作紀錄', icon: 'Tools', roles: ['admin'] }
       },
       {
-        path: '/setting',
-        component: () => import('@/views/setting/index.vue'),
-        name: 'Setting',
+        path: '/report',
+        component: () => import('@/views/report/index.vue'),
+        name: 'Report',
         meta: { title: '報表', icon: 'Tools', roles: ['admin'] }
       },
       {

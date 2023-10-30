@@ -19,10 +19,11 @@ export function user_login(data) {
  * @returns
  */
 export function user_logout(params) {
+  console.log(params);
   return request({
     url: '/api/logout',
     method: 'get',
-    params
+    params:{params}
   })
 }
 

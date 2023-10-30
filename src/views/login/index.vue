@@ -6,15 +6,15 @@
         <el-form-item prop="username">
           <el-input v-model="param.username" placeholder="用户名">
             <template #prepend>
-              <i class="el-icon-s-custom" />
+              <el-icon><User /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input v-model="param.password" placeholder="密码" :type="passwordType" @keyup.enter="submitForm">
             <template #prepend>
-              <i v-show="passwordLock" class="el-icon-lock" @click="switchPass" />
-              <i v-show="!passwordLock" class="el-icon-unlock" @click="switchPass" />
+              <el-icon v-show="passwordLock" @click="switchPass" ><Lock /></el-icon>
+              <el-icon v-show="!passwordLock" @click="switchPass" ><Unlock /></el-icon>
             </template>
           </el-input>
         </el-form-item>

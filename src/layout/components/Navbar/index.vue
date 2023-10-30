@@ -10,7 +10,7 @@
         在線:<span class="mx-2">1</span>
       </div>
       <el-button  round>在線客服</el-button>
-      <el-button  round>網路測速</el-button>
+      <el-button  round @click="openNetSpeed=true">網路測速</el-button>
       <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
           <!-- <img :src="avatar ? avatar : 'src/assets/img/defaultUser.svg'" class="user-avatar w-10" /> -->
@@ -30,10 +30,19 @@
       </div>
     </div>
   </el-menu>
+  <el-dialog
+    title=""
+    v-model="openNetSpeed"
+    width="30%"
+    @close="">
+    <span></span>
+    <NetSpeed></NetSpeed>
+  </el-dialog>
+  
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -41,6 +50,7 @@ import Hamburger from './Hamburger.vue'
 import Marquee from './Marquee.vue'
 import Screenfull from './Screenfull.vue'
 import { UserFilled } from '@element-plus/icons-vue'
+import NetSpeed from '@/components/NetSeedTable/index.vue'
 const router = useRouter()
 const store = useStore()
 const opened = computed(() => store.state.app.sidebar.opened)
@@ -59,14 +69,17 @@ const loginOut = () => {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning'
-  })
-    .then(() => {
+  }).then(() => {
+    console.log("退出登录");
       store.dispatch('user/logout').then(() => {
         router.push('/login')
       })
     })
     .catch(() => {})
 }
+/// 打開測速頁
+const openNetSpeed= ref(false);
+
 </script>
 
 <style lang="scss" scoped>
